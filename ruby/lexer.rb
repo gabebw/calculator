@@ -26,8 +26,3 @@ class Lexer
     end
   end
 end
-
-lexer = Lexer.new("1 + 200 + 8 - 3 * 2 / 4")
-lexer.tokenize
-
-p lexer.tokens
