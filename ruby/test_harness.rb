@@ -4,8 +4,8 @@ require "./lexer"
 require "./parser"
 require "./interpreter"
 
-expression = "-4 + 1+ 200/100*3 - 3.5 + -3.5 -3.5"
-expected_result = -7.5
+expression = "-4 + 1+ 200/100*3 - 3.5 + -3.5 -3.5 + 3^2"
+expected_result = 1.5
 
 lexer = Lexer.new(expression)
 lexer.tokenize

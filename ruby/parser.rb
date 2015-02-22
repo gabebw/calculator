@@ -8,6 +8,7 @@ class Parser
     "-" => 2,
     "*" => 3,
     "/" => 3,
+    "^" => 4,
   }
 
   def initialize(tokens)

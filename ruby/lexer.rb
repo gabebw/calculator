@@ -1,5 +1,5 @@
 class Lexer
-  OPERATORS = %w(+ * - /)
+  OPERATORS = %w(+ * - / ^)
   OPERATOR_REGEX = Regexp.union(*OPERATORS)
 
   def initialize(text)

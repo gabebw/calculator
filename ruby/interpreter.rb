@@ -32,6 +32,8 @@ class Interpreter
       number1 - number2
     when "+"
       number1 + number2
+    when "^"
+      number1 ** number2
     end
   end
 end
