@@ -10,9 +10,10 @@ class Interpreter
         @stack << item[1]
       elsif item[0] == :OPERATOR
         operator = item[1]
-        number1 = @stack.pop
         number2 = @stack.pop
-        @stack << apply(operator, number1, number2)
+        number1 = @stack.pop
+        result = apply(operator, number1.to_f, number2.to_f)
+        @stack << result
       end
     end
 
