@@ -13,7 +13,7 @@ class Lexer
     i = 0
     while i < @text.size
       chunk = @text[i..-1]
-      if number = chunk[/\A(\d+)/, 1]
+      if number = chunk[/\A([\d\.]+)/, 1]
         @tokens << [:NUMBER, number]
         i += number.size
       elsif space = chunk[/\A(\s+)/, 1]

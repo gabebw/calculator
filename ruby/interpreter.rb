@@ -12,7 +12,7 @@ class Interpreter
         operator = item[1]
         number2 = @stack.pop
         number1 = @stack.pop
-        result = apply(operator, number1.to_f, number2.to_f)
+        result = apply(operator, number1, number2)
         @stack << result
       end
     end

@@ -21,7 +21,7 @@ class Parser
   def parse
     @tokens.each do |token|
       if token[0] == :NUMBER
-        @output << [token[0], token[1].to_i]
+        @output << [token[0], token[1].to_f]
       elsif token[0] == :OPERATOR
         o1 = token[1]
         if @operators.size > 0

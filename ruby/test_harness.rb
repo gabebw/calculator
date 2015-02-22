@@ -1,9 +1,11 @@
+require "pp"
+
 require "./lexer"
 require "./parser"
 require "./interpreter"
 
-expression = "1+ 200*3/4 - 51"
-expected_result = 100
+expression = "1+ 200*3/4 - 5.5"
+expected_result = 145.5
 
 lexer = Lexer.new(expression)
 lexer.tokenize
@@ -17,6 +19,9 @@ result = interpreter.run
 if result == expected_result
   puts "It works!"
 else
-  puts "It doesn't work :("
-  p parser.output
+  puts "!! It doesn't work. Got #{result}, expected #{expected_result}"
+
+  pp lexer.tokens
+  puts
+  pp parser.output
 end
