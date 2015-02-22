@@ -16,6 +16,9 @@ class Lexer
       if number = chunk[/\A([\d\.]+)/, 1]
         @tokens << [:NUMBER, number]
         i += number.size
+      elsif negative_number = chunk[/\A(\-[\d\.]+)/, 1]
+        @tokens << [:NUMBER, negative_number]
+        i += negative_number.size
       elsif space = chunk[/\A(\s+)/, 1]
         # Ignore spaces
         i += space.size
