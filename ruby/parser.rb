@@ -26,9 +26,13 @@ class Parser
         o1 = token[1]
         if @operators.size > 0
           o2 = @operators.last[1]
-          while o2 && PRECEDENCE[o1] < PRECEDENCE[o2]
+          while o2 && PRECEDENCE[o1] <= PRECEDENCE[o2]
             @output << @operators.pop
-            o2 = @operators.last[1]
+            if @operators.length > 0
+              o2 = @operators.last[1]
+            else
+              o2 = nil
+            end
           end
         end
 
