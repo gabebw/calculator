@@ -2,15 +2,6 @@ require "./lexer"
 require "./parser"
 require "./interpreter"
 
-expected_parser_output = [
-  [:NUMBER, 1],
-  [:NUMBER, 200],
-  [:NUMBER, 3],
-  [:NUMBER, 4],
-  [:OPERATOR, "/"],
-  [:OPERATOR, "*"],
-  [:OPERATOR, "+"],
-]
 
 lexer = Lexer.new("1 + 200 * 3 / 4")
 lexer.tokenize
