@@ -6,7 +6,7 @@ import (
 )
 
 type Token struct {
-	Kind string
+	Kind  string
 	Value string
 }
 
@@ -33,13 +33,13 @@ func Lex(expression string) []Token {
 		matchedNumber, _ := regexp.MatchString("\\A[0-9\\.]+", chunk)
 		if matchedNumber {
 			token := Token{
-				Kind: "NUMBER",
+				Kind:  "NUMBER",
 				Value: chunk,
 			}
 			tokens = append(tokens, token)
 		} else if isOperator(chunk) {
 			token := Token{
-				Kind: "OPERATOR",
+				Kind:  "OPERATOR",
 				Value: chunk,
 			}
 			tokens = append(tokens, token)
