@@ -16,10 +16,12 @@ var PRECEDENCE = map[string]int{
 }
 
 type Operator struct {
+	Kind  string
 	Value string
 }
 
 type Number struct {
+	Kind  string
 	Value float64
 }
 
@@ -29,16 +31,18 @@ type Parser struct {
 	Output    []interface{}
 }
 
-func (parser *Parser) parse() {
+func (parser *Parser) Parse() {
 	for _, token := range parser.Tokens {
 		if token.Kind == "NUMBER" {
 			parsedNumber, _ := strconv.ParseFloat(token.Value, 64)
 			parsedToken := Number{
+				Kind:  token.Kind,
 				Value: parsedNumber,
 			}
 			parser.Output = append(parser.Output, parsedToken)
 		} else if token.Kind == "OPERATOR" {
 			parsedToken := Operator{
+				Kind:  token.Kind,
 				Value: token.Value,
 			}
 			parser.Output = append(parser.Output, parsedToken)

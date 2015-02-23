@@ -10,10 +10,11 @@ func main() {
 	expression := "1 + 2.3 * 4 - 2 ^ 5"
 	tokens := lexer.Lex(expression)
 
-	fmt.Println(tokens)
-	p := parser.Parser{
+	myParser := parser.Parser{
 		Tokens: tokens,
 	}
+	myParser.Parse()
 
-	fmt.Println(p)
+	// fmt.Println(tokens)
+	fmt.Println(myParser.Output)
 }
