@@ -1,7 +1,6 @@
 package lexer
 
 import (
-	"fmt"
 	"regexp"
 )
 
@@ -46,8 +45,5 @@ func Lex(expression string) []Token {
 		}
 	}
 
-	for _, token := range tokens {
-		fmt.Printf("%#v\n", token)
-	}
 	return tokens
 }
