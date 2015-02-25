@@ -15,17 +15,11 @@ var PRECEDENCE = map[string]int{
 }
 
 type Node interface {
-	NodeKind() string
 	NodeValue() string
 }
 
 type Operator struct {
-	Kind  string
 	Value string
-}
-
-func (operator Operator) NodeKind() string {
-	return operator.Kind
 }
 
 func (operator Operator) NodeValue() string {
@@ -33,12 +27,7 @@ func (operator Operator) NodeValue() string {
 }
 
 type Number struct {
-	Kind  string
 	Value string
-}
-
-func (number Number) NodeKind() string {
-	return number.Kind
 }
 
 func (number Number) NodeValue() string {
@@ -72,13 +61,11 @@ func (parser *Parser) Parse() {
 	for _, token := range parser.Tokens {
 		if token.Kind == "NUMBER" {
 			parsedToken := Number{
-				Kind:  token.Kind,
 				Value: token.Value,
 			}
 			parser.Output = append(parser.Output, parsedToken)
 		} else if token.Kind == "OPERATOR" {
 			operator := Operator{
-				Kind:  token.Kind,
 				Value: token.Value,
 			}
 			o1 := operator.Value

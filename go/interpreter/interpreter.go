@@ -27,11 +27,11 @@ func NewInterpreter(nodes []parser.Node) Interpreter {
 
 func (interpreter *Interpreter) Run() float64 {
 	for _, parsedToken := range interpreter.Rpn {
-		switch parsedToken.NodeKind() {
-		case "NUMBER":
+		switch parsedToken.(type) {
+		case parser.Number:
 			parsedNumber, _ := strconv.ParseFloat(parsedToken.NodeValue(), 64)
 			interpreter.Stack = append(interpreter.Stack, parsedNumber)
-		case "OPERATOR":
+		case parser.Operator:
 			operator := parsedToken.NodeValue()
 			number2 := popNumberFromStack(interpreter)
 			number1 := popNumberFromStack(interpreter)
