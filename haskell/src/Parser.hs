@@ -34,7 +34,10 @@ integerParser = fmap read $ many digit
 operatorNodeParser :: Parser Node
 operatorNodeParser = do
     spaces
-    fmap (OperatorNode . operatorFromChar) $ oneOf "+-*"
+    (fmap (OperatorNode . operatorFromChar) $ oneOf operatorChars)
+
+operatorChars :: [Char]
+operatorChars = "+-*"
 
 operatorFromChar :: Char -> Operator
 operatorFromChar '+' = Plus
