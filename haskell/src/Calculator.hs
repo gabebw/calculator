@@ -17,13 +17,22 @@ evaluateExpression input =
     Right result -> Just result
 
 parser :: Parser [Node a]
-parser = do
-    number1 <- numberParser
+parser = expressionParser
+
+expressionParser :: Parser [Node a]
+expressionParser = do
+    number <- numberParser
+    spaces
+    nodes <- many furtherExpressionParser
+    return $ [Number (read number)] ++ (concat nodes)
+
+furtherExpressionParser :: Parser [Node a]
+furtherExpressionParser = do
     spaces
     operator <- operatorParser
     spaces
-    number2 <- numberParser
-    return $ [Number (read number1), Operator operator, Number (read number2)]
+    number <- numberParser
+    return $ [Operator operator, Number (read number)]
 
 integerParser :: Parser String
 integerParser = many digit
