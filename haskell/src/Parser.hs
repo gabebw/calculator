@@ -19,11 +19,9 @@ expressionParser = do
     nodes <- many furtherExpressionParser
     return $ [numberNode] ++ (concat nodes)
 
+-- sequence turns `[Parser Node]` into `Parser [Node]`
 furtherExpressionParser :: Parser [Node]
-furtherExpressionParser = do
-    operatorNode <- operatorNodeParser
-    numberNode <- numberNodeParser
-    return $ [operatorNode, numberNode]
+furtherExpressionParser = sequence [operatorNodeParser, numberNodeParser]
 
 numberNodeParser :: Parser Node
 numberNodeParser = do
