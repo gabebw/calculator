@@ -20,7 +20,7 @@ evalNode (o@(OperatorNode o1):xs) (output, operators@(_:_:_)) =
 evalNode (o:xs) (output, operators) =
     evalNode xs (output, operators ++ [o])
 
-evalNode [] (output, operators) = output ++ operators
+evalNode [] (output, operators) = output ++ (reverse operators)
 
 poperator :: Operator -> ([Node a], [Node a]) -> ([Node a], [Node a])
 poperator o1 (output, operators) =

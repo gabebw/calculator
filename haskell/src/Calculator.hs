@@ -34,7 +34,7 @@ numberParser :: Parser String
 numberParser = integerParser
 
 operatorParser :: Parser Char
-operatorParser = char '+'
+operatorParser = oneOf "+-*"
 
 operatorFromChar :: Char -> Operator
 operatorFromChar '+' = Plus
