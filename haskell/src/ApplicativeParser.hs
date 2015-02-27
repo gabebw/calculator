@@ -18,17 +18,17 @@ expressionParser :: Parser [Node]
 expressionParser = (:) <$> numberNodeParser <*> manyFurtherExpressionsParser
 
 manyFurtherExpressionsParser :: Parser [Node]
-manyFurtherExpressionsParser = fmap concat $ many1 furtherExpressionParser
+manyFurtherExpressionsParser = concat <$> many1 furtherExpressionParser
 
 -- sequence turns `[Parser Node]` into `Parser [Node]`
 furtherExpressionParser :: Parser [Node]
 furtherExpressionParser = sequence [operatorNodeParser, numberNodeParser]
 
 numberNodeParser :: Parser Node
-numberNodeParser = spaces *> (NumberNode <$> integerParser)
+numberNodeParser = spaces *> (NumberNode <$> floatParser)
 
-integerParser :: Parser Float
-integerParser = fmap read $ many1 digit
+floatParser :: Parser Float
+floatParser = read <$> (many1 digit)
 
 operatorNodeParser :: Parser Node
 operatorNodeParser = spaces *> operatorNode
