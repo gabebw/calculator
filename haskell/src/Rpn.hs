@@ -3,9 +3,9 @@ module Rpn where
 import Nodes
 
 eval :: [Node a] -> [Node a]
-eval nodes = fst $ evalNode nodes ([], [])
+eval nodes = evalNode nodes ([], [])
 
-evalNode :: [Node a] -> ([Node a], [Node a]) -> ([Node a], [Node a])
+evalNode :: [Node a] -> ([Node a], [Node a]) -> [Node a]
 evalNode (n@(NumberNode _):xs) (output, operators) =
     evalNode xs ((output ++ [n]), operators)
 
@@ -20,7 +20,7 @@ evalNode (o@(OperatorNode o1):xs) (output, operators@(_:_)) =
 evalNode (o:xs) (output, operators) =
     evalNode xs (output, operators ++ [o])
 
-evalNode [] (output, operators) = (output, operators)
+evalNode [] (output, _) = output
 
 poperator :: Operator -> ([Node a], [Node a]) -> ([Node a], [Node a])
 poperator o1 (output, operators) =
