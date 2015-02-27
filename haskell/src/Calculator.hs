@@ -1,4 +1,4 @@
-module Calculator where
+module Calculator (evaluateExpression) where
 
 import Text.ParserCombinators.Parsec
 import Nodes
