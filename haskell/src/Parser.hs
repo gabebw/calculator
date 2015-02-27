@@ -21,20 +21,22 @@ expressionParser = do
 
 furtherExpressionParser :: Parser [Node]
 furtherExpressionParser = do
-    spaces
-    op <- operatorParser
-    spaces
+    operatorNode <- operatorNodeParser
     numberNode <- numberNodeParser
-    return $ [OperatorNode op, numberNode]
+    return $ [operatorNode, numberNode]
 
 numberNodeParser :: Parser Node
-numberNodeParser = fmap NumberNode integerParser
+numberNodeParser = do
+    spaces
+    fmap NumberNode integerParser
 
 integerParser :: Parser Float
 integerParser = fmap read $ many digit
 
-operatorParser :: Parser Operator
-operatorParser = fmap operatorFromChar $ oneOf "+-*"
+operatorNodeParser :: Parser Node
+operatorNodeParser = do
+    spaces
+    fmap (OperatorNode . operatorFromChar) $ oneOf "+-*"
 
 operatorFromChar :: Char -> Operator
 operatorFromChar '+' = Plus
