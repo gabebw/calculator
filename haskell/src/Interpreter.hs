@@ -2,10 +2,12 @@ module Interpreter (interpret) where
 
 import Nodes
 
+type OutputStack = [Node]
+
 interpret :: [Node] -> Float
 interpret nodes = interpret' nodes []
 
-interpret' :: [Node] -> [Node] -> Float
+interpret' :: [Node] -> OutputStack -> Float
 interpret' (n@(NumberNode _):xs) stack = interpret' xs (stack ++ [n])
 interpret' (op@(OperatorNode o):xs) ((NumberNode f1):(NumberNode f2):ss) =
 	interpret' xs (ss ++ [result])
