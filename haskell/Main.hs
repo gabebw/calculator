@@ -8,4 +8,4 @@ main = do
     print $ "Should be " ++ show expectedResult  ++ ": " ++ (show $ interpret rpnNodes)
     where
         expectedResult = 1 * 2 + 3 * 4 :: Float
-        rpnNodes = maybe [] evalToRpn $ evaluateExpression "1 * 2 + 3 * 4"
+        rpnNodes = maybe [] evalToRpn $ evaluateExpression "1 * 2+3 * 4"
