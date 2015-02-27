@@ -32,15 +32,10 @@ integerParser :: Parser Float
 integerParser = fmap read $ many digit
 
 operatorNodeParser :: Parser Node
-operatorNodeParser = do
-    spaces
-    (fmap (OperatorNode . operatorFromChar) $ oneOf operatorChars)
+operatorNodeParser = spaces >> operatorNode
 
-operatorChars :: [Char]
-operatorChars = "+-*"
-
-operatorFromChar :: Char -> Operator
-operatorFromChar '+' = Plus
-operatorFromChar '-' = Minus
-operatorFromChar '*' = Times
-operatorFromChar _ = error "OH NO"
+operatorNode :: Parser Node
+operatorNode = do
+    try (char '+' >> return (OperatorNode Plus))
+        <|> try (char '-' >> return (OperatorNode Minus))
+        <|> (char '*' >> return (OperatorNode Times))
