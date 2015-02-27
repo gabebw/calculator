@@ -1,4 +1,4 @@
-module Rpn where
+module Rpn (eval) where
 
 import Nodes
 
@@ -9,7 +9,7 @@ evalNode :: [Node a] -> ([Node a], [Node a]) -> [Node a]
 evalNode (n@(NumberNode _):xs) (output, operators) =
     evalNode xs ((output ++ [n]), operators)
 
-evalNode (o@(OperatorNode o1):xs) (output, operators@(_:_)) =
+evalNode (o@(OperatorNode o1):xs) (output, operators@(_:_:_)) =
     if o1 <= o2
         then evalNode xs (poperator o1 (output, operators))
     else
@@ -20,7 +20,7 @@ evalNode (o@(OperatorNode o1):xs) (output, operators@(_:_)) =
 evalNode (o:xs) (output, operators) =
     evalNode xs (output, operators ++ [o])
 
-evalNode [] (output, _) = output
+evalNode [] (output, operators) = output ++ operators
 
 poperator :: Operator -> ([Node a], [Node a]) -> ([Node a], [Node a])
 poperator o1 (output, operators) =
