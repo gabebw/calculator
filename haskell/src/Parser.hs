@@ -6,7 +6,7 @@ import Nodes
 evaluateExpression  :: String -> Maybe ([Node])
 evaluateExpression input =
     case parse parser "(unknown)" input of
-    Left parseError -> Nothing
+    Left _ -> Nothing
     Right result -> Just result
 
 parser :: Parser [Node]
