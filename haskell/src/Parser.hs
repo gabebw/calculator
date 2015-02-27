@@ -16,7 +16,7 @@ expressionParser :: Parser [Node]
 expressionParser = do
     numberNode <- numberNodeParser
     spaces
-    nodes <- many furtherExpressionParser
+    nodes <- many1 furtherExpressionParser
     return $ [numberNode] ++ (concat nodes)
 
 -- sequence turns `[Parser Node]` into `Parser [Node]`
@@ -29,7 +29,7 @@ numberNodeParser = do
     fmap NumberNode integerParser
 
 integerParser :: Parser Float
-integerParser = fmap read $ many digit
+integerParser = fmap read $ many1 digit
 
 operatorNodeParser :: Parser Node
 operatorNodeParser = spaces >> operatorNode
