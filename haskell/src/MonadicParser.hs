@@ -1,4 +1,4 @@
-module Parser (evaluateExpression) where
+module MonadicParser (evaluateExpression) where
 
 import Text.ParserCombinators.Parsec
 import Nodes
