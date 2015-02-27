@@ -12,7 +12,7 @@ precedence Times = 2
 instance Ord Operator where
     compare = compare `on` precedence
 
-data Node a = OperatorNode { operator :: Operator } | NumberNode { value :: Float }
-instance Show (Node a) where
+data Node = OperatorNode { operator :: Operator } | NumberNode { value :: Float }
+instance Show Node where
     show (NumberNode f) = "NumberNode " ++ (show f)
     show (OperatorNode o) = show o

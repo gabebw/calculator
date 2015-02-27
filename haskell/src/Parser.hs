@@ -3,23 +3,23 @@ module Parser (evaluateExpression) where
 import Text.ParserCombinators.Parsec
 import Nodes
 
-evaluateExpression  :: String -> Maybe ([Node a])
+evaluateExpression  :: String -> Maybe ([Node])
 evaluateExpression input =
     case parse parser "(unknown)" input of
     Left parseError -> Nothing
     Right result -> Just result
 
-parser :: Parser [Node a]
+parser :: Parser [Node]
 parser = expressionParser
 
-expressionParser :: Parser [Node a]
+expressionParser :: Parser [Node]
 expressionParser = do
     number <- numberParser
     spaces
     nodes <- many furtherExpressionParser
     return $ [NumberNode (read number)] ++ (concat nodes)
 
-furtherExpressionParser :: Parser [Node a]
+furtherExpressionParser :: Parser [Node]
 furtherExpressionParser = do
     spaces
     opChar <- operatorParser

@@ -2,10 +2,10 @@ module Rpn (evalToRpn) where
 
 import Nodes
 
-evalToRpn :: [Node a] -> [Node a]
+evalToRpn :: [Node] -> [Node]
 evalToRpn nodes = evalNode nodes ([], [])
 
-evalNode :: [Node a] -> ([Node a], [Node a]) -> [Node a]
+evalNode :: [Node] -> ([Node], [Node]) -> [Node]
 evalNode (n@(NumberNode _):xs) (output, operators) =
     evalNode xs ((output ++ [n]), operators)
 
@@ -22,7 +22,7 @@ evalNode (o:xs) (output, operators) =
 
 evalNode [] (output, operators) = output ++ (reverse operators)
 
-poperator :: Operator -> ([Node a], [Node a]) -> ([Node a], [Node a])
+poperator :: Operator -> ([Node], [Node]) -> ([Node], [Node])
 poperator o1 (output, operators) =
     if o1 <= o2
         then poperator o1 (output ++ [lastOperator], init operators)
