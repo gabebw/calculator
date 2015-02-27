@@ -14,27 +14,27 @@ parser = expressionParser
 
 expressionParser :: Parser [Node]
 expressionParser = do
-    number <- numberParser
+    numberNode <- numberNodeParser
     spaces
     nodes <- many furtherExpressionParser
-    return $ [NumberNode (read number)] ++ (concat nodes)
+    return $ [numberNode] ++ (concat nodes)
 
 furtherExpressionParser :: Parser [Node]
 furtherExpressionParser = do
     spaces
-    opChar <- operatorParser
+    op <- operatorParser
     spaces
-    number <- numberParser
-    return $ [OperatorNode (operatorFromChar opChar), NumberNode (read number)]
+    numberNode <- numberNodeParser
+    return $ [OperatorNode op, numberNode]
 
-integerParser :: Parser String
-integerParser = many digit
+numberNodeParser :: Parser Node
+numberNodeParser = fmap NumberNode integerParser
 
-numberParser :: Parser String
-numberParser = integerParser
+integerParser :: Parser Float
+integerParser = fmap read $ many digit
 
-operatorParser :: Parser Char
-operatorParser = oneOf "+-*"
+operatorParser :: Parser Operator
+operatorParser = fmap operatorFromChar $ oneOf "+-*"
 
 operatorFromChar :: Char -> Operator
 operatorFromChar '+' = Plus
