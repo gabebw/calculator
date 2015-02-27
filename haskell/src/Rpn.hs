@@ -1,9 +1,9 @@
-module Rpn (eval) where
+module Rpn (evalToRpn) where
 
 import Nodes
 
-eval :: [Node a] -> [Node a]
-eval nodes = evalNode nodes ([], [])
+evalToRpn :: [Node a] -> [Node a]
+evalToRpn nodes = evalNode nodes ([], [])
 
 evalNode :: [Node a] -> ([Node a], [Node a]) -> [Node a]
 evalNode (n@(NumberNode _):xs) (output, operators) =

@@ -1,5 +1,11 @@
-import Calculator (evaluateExpression)
-import Rpn (eval)
+import Parser (evaluateExpression)
+import Rpn (evalToRpn)
+import Interpreter (interpret)
 
 main :: IO ()
-main = print $ maybe [] eval $ evaluateExpression "1 * 2 + 3 * 4"
+main = do
+    print rpnNodes
+    print $ "Should be " ++ show expectedResult  ++ ": " ++ (show $ interpret rpnNodes)
+    where
+        expectedResult = 1 * 2 + 3 * 4 :: Float
+        rpnNodes = maybe [] evalToRpn $ evaluateExpression "1 * 2 + 3 * 4"
