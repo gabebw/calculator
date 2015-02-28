@@ -5,11 +5,11 @@ import Nodes
 -- *> "points at the value you want to keep" (throws away the left)
 import Control.Applicative ((<$>), (<*>), (*>), pure)
 
+justBeYourself :: Either a b -> Maybe b
+justBeYourself = either (const Nothing) Just
+
 evaluateExpression  :: String -> Maybe ([Node])
-evaluateExpression input =
-    case parse parser "(unknown)" input of
-    Left _ -> Nothing
-    Right result -> Just result
+evaluateExpression input = justBeYourself $ parse parser "(unknown)" input
 
 parser :: Parser [Node]
 parser = expressionParser
