@@ -1,4 +1,4 @@
-fn is_operator(character: &str) -> bool {
+pub fn is_operator(character: &str) -> bool {
     let operators = ["+", "-", "*", "/", "^"];
     for &operator in operators.iter() {
         if character == operator {
