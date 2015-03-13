@@ -1,5 +1,14 @@
+use std::collections::VecMap;
+
+let mut operators : VecMap<&str> = VecMap::new();
+operators.insert(4, "^");
+operators.insert(3, "*");
+operators.insert(2, "/");
+operators.insert(1, "-");
+operators.insert(1, "+");
+
 pub fn is_operator(character: &str) -> bool {
-    let operators = ["+", "-", "*", "/", "^"];
+    let operators = operators.values().collect();
     for &operator in operators.iter() {
         if character == operator {
             return true;
