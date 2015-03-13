@@ -11,6 +11,10 @@ fn precedence(operator: &str) -> i64 {
     }
 }
 
+pub fn has_lower_precedence(operator: &str, other_operator: &str) -> bool {
+    precedence(operator) <= precedence(other_operator)
+}
+
 pub fn is_operator(character: &str) -> bool {
     for &operator in OPERATORS.iter() {
         if character == operator {
