@@ -1,15 +1,18 @@
-use std::collections::VecMap;
+const OPERATORS : [&'static str; 5] = ["^", "*", "/", "+", "-"];
 
-let mut operators : VecMap<&str> = VecMap::new();
-operators.insert(4, "^");
-operators.insert(3, "*");
-operators.insert(2, "/");
-operators.insert(1, "-");
-operators.insert(1, "+");
+fn precedence(operator: &str) -> i64 {
+    match operator {
+        "^" => 4,
+        "*" => 3,
+        "/" => 3,
+        "+" => 2,
+        "-" => 2,
+        _ => 0,
+    }
+}
 
 pub fn is_operator(character: &str) -> bool {
-    let operators = operators.values().collect();
-    for &operator in operators.iter() {
+    for &operator in OPERATORS.iter() {
         if character == operator {
             return true;
         }
